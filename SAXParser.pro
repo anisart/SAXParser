@@ -17,9 +17,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     kmlreader.cpp \
-    gpxreader.cpp
+    gpxreader.cpp \
+    trackparser.cpp
 
 HEADERS += \
     kmlreader.h \
     cpoint.h \
-    gpxreader.h
+    gpxreader.h \
+    trackparser.h

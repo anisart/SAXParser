@@ -54,7 +54,7 @@ bool KMLReader::characters(const QString &ch)
             list2 = iterator1.next().split(QRegExp("[,]"), QString::SkipEmptyParts);
 //            qDebug()<<list2;
             QStringListIterator iterator2(list2);
-            double x = iterator2.next().toDouble(), y = iterator2.next().toDouble();
+            double y = iterator2.next().toDouble(), x = iterator2.next().toDouble();
             if (iterator2.hasNext())
             {
                 double z = iterator2.next().toDouble();
