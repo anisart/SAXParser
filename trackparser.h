@@ -3,14 +3,16 @@
 
 #include <QList>
 #include "cpoint.h"
+#include "track.h"
 
 class TrackParser
 {
-    QList<CPoint> points;
+    Track track;
+    enum trackType {KML, GPX, OTHER};
+    trackType idTrack(const QString &fileName);
 public:
     TrackParser();
-    QList<CPoint> parse(const QString &fileName, bool *hasEle = 0, bool *hasTime = 0);
-//    QList<CPoint> getPoints() {return points;}
+    Track parse(const QString &fileName);
 };
 
 #endif // TRACKPARSER_H

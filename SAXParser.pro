@@ -24,4 +24,5 @@ HEADERS += \
     kmlreader.h \
     cpoint.h \
     gpxreader.h \
-    trackparser.h
+    trackparser.h \
+    track.h

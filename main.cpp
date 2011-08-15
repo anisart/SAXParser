@@ -7,20 +7,12 @@
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);/*
-    KMLReader c;
-    c.readFile("/home/anisart/GPS/doc.kml");
-    GPXReader g;
-    g.readFile("/home/anisart/GPS/Track201108050930.gpx");
-    QList<CPoint> points=g.getPoints();
-    foreach (CPoint point, points)
-    {
-        qDebug()<<"lat = "<<point.getLat()<<", lon = "<<point.getLon()<<", ele = "<<point.getEle()<<" "<<point.getTime().toString(Qt::DefaultLocaleLongDate);
-    }*/
-
+    QCoreApplication a(argc, argv);
     TrackParser parser;
-    bool hasEle = 0, hasTime = 0;
-    QList<CPoint> points = parser.parse("/home/anisart/GPS/doc.kml",&hasEle,&hasTime);
+    Track t=parser.parse("/home/anisart/GPS/doc.kml");
+    QList<CPoint> points = t.getPoints();
+    bool hasEle=t.hasEle;
+    bool hasTime=t.hasTime;
     qDebug()<<hasEle<<hasTime;
     if (hasEle && hasTime)
         foreach (CPoint point, points)
