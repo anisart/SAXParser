@@ -13,7 +13,6 @@ public:
     {
         lat=x; lon=y; ele=z; time=d;
     }
-
     double getLat(){return lat;}
     double getLon(){return lon;}
     double getEle(){return ele;}

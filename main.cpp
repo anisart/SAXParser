@@ -10,10 +10,11 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     TrackParser parser;
     Track t=parser.parse("/home/anisart/GPS/doc.kml");
-    QList<CPoint> points = t.getPoints();
+    QList<CPoint> points = t.points;
     bool hasEle=t.hasEle;
     bool hasTime=t.hasTime;
     qDebug()<<hasEle<<hasTime;
+    qDebug()<<t.title;
     if (hasEle && hasTime)
         foreach (CPoint point, points)
             qDebug()<<"lat = "<<point.getLat()<<", lon = "<<point.getLon()<<", ele = "<<point.getEle()<<" "<<point.getTime().toString(Qt::DefaultLocaleLongDate);
