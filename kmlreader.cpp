@@ -1,8 +1,7 @@
 #include "kmlreader.h"
 #include <QDebug>
-#include <string>
-#include <QVector>
 #include "cpoint.h"
+
 KMLReader::KMLReader()
 {
     is_point=false;
@@ -26,7 +25,6 @@ bool KMLReader::startElement(const QString &namespaceURI, const QString &localNa
     else
         if
             (qName=="coordinates") is_point=true;
-        //else {is_point=false; is_LineString=false;}
     return true;
 }
 
@@ -43,21 +41,23 @@ bool KMLReader::characters(const QString &ch)
 {
     if (is_point&&is_LineString)
     {
-//        qDebug()<<"point";
         QStringList list1, list2;
         list1 = ch.split(QRegExp("[ ]"), QString::SkipEmptyParts);
-//        qDebug()<<list1;
         QStringListIterator iterator1(list1);
         while (iterator1.hasNext())
         {
             CPoint f;
             list2 = iterator1.next().split(QRegExp("[,]"), QString::SkipEmptyParts);
-//            qDebug()<<list2;
             QStringListIterator iterator2(list2);
-            double y = iterator2.next().toDouble(), x = iterator2.next().toDouble();
+            bool ok;
+            double y = iterator2.next().toDouble(&ok);
+            if (!ok||y<-180||y>180) return true;
+            double x = iterator2.next().toDouble(&ok);
+            if (!ok||x<-90||x>90) return true;
             if (iterator2.hasNext())
             {
-                double z = iterator2.next().toDouble();
+                double z = iterator2.next().toDouble(&ok);
+                if (!ok) return true;
                 f.setData(x,y,z);
                 has_ele=true;
             }
@@ -67,7 +67,6 @@ bool KMLReader::characters(const QString &ch)
                 if (has_ele==true) has_ele=false;
             }
             points.insert(points.size(),f);
-//            qDebug()<<has_ele;
         }
     }
     return true;

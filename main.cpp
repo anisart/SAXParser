@@ -10,7 +10,17 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     TrackParser parser;
     Track t=parser.parse("/home/anisart/GPS/doc.kml");
-    QList<CPoint> points = t.points;
+//    qDebug()<<t.deletePoint(1);
+    CPoint c; c.setData();
+    qDebug()<<t.insertPoint(2,c);
+    qDebug()<<t.getListIds();
+    QList<CPoint> points;
+    int i = 0;
+    while(i<t.getListIds().count())
+    {
+        points.append(t.getPoint(t.getListIds().at(i)));
+        i++;
+    }
     bool hasEle=t.hasEle;
     bool hasTime=t.hasTime;
     qDebug()<<hasEle<<hasTime;

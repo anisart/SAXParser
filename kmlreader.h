@@ -2,8 +2,8 @@
 #define KMLREADER_H
 
 #include <QXmlDefaultHandler>
-#include <QList>
 #include "cpoint.h"
+
 class KMLReader : public QXmlDefaultHandler
 {
 public:
@@ -16,7 +16,6 @@ protected:
     bool endElement(const QString &namespaceURI, const QString &localName, const QString &qName);
     bool characters(const QString &ch);
     bool fatalError(const QXmlParseException &exception);
-
 private:
     QList<CPoint> points;
     bool is_point;

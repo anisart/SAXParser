@@ -49,7 +49,7 @@ Track TrackParser::parse(const QString &fileName)
         qDebug()<<"kml";
         KMLReader reader;
         reader.readFile(fileName);
-        track.points=reader.getPoints();
+        track.setPoints(reader.getPoints());
         track.hasEle = reader.has_ele;
         track.isValid = true;
         return track;
@@ -59,11 +59,10 @@ Track TrackParser::parse(const QString &fileName)
         qDebug()<<"gpx";
         GPXReader reader;
         reader.readFile(fileName);
-        track.points=reader.getPoints();
+        track.setPoints(reader.getPoints());
         track.hasEle = reader.has_ele;
         track.hasTime = reader.has_time;
         track.isValid = true;
         return track;
     }
-    //else return track;
 }
